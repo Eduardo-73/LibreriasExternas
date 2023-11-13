@@ -8,46 +8,39 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author edu
+ * @author eduar
  */
-public class Programa {
+public class Programa2 {
 
     public static void main(String[] args) {
 
-        String menu = """
-                      1.- Generar Pin (4 dígitos entre 0 y 9)
-                      2.- Generar contraseña de 8 digitos para un usuario
-                      3.- Generar una contraseña aleatoria del tamaño que tu elijas
-                      4.- Salir
-                      """;
-        int opcion = 0, tamanio = 0;
+        String[] opcionesMenu = {"1.- PIN",
+            "2.- Sistema operativo", "3.- Contraseña personalizada"};
+        String opcionElegida;
+        String opcionRepetir = "";
+        int tamanio = 0;
         boolean repertir = true;
         do {
-            do {
-                try {
-                    opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
-                } catch (NumberFormatException nfe) {
-                    JOptionPane.showMessageDialog(null, "Error");
-                    JOptionPane.showMessageDialog(null,
-                            "Prueba poniendo 1, 2, 3 o 4 ", "Error",
-                            JOptionPane.WARNING_MESSAGE);
-                }
-            } while (opcion < 1 || opcion > 4);
-
-            switch (opcion) {
-                case 1 -> {
+            opcionElegida = (String) JOptionPane.showInputDialog(null,
+                    "Elige una opción", "Generador de contraseñas",
+                    JOptionPane.QUESTION_MESSAGE, null,
+                    opcionesMenu, "1.- PIN");
+            switch (opcionElegida) {
+                case "1.- PIN" -> {
                     JOptionPane.showMessageDialog(null,
                             "Has elegido la opcion 1");
                     JOptionPane.showMessageDialog(null,
                             "Este es tu pin: " + Generador.generarPin());
                 }
-                case 2 -> {
+
+                case "2.- Sistema operativo" -> {
                     JOptionPane.showMessageDialog(null,
                             "Has elegido la opcion 2");
                     JOptionPane.showMessageDialog(null,
                             "Este es tu pin: " + Generador.generarContraseñaUsuario());
                 }
-                case 3 -> {
+
+                case "3.- Contraseña personalizada" -> {
                     JOptionPane.showMessageDialog(null,
                             "Has elegido la opcion 3");
                     do {
@@ -70,6 +63,11 @@ public class Programa {
                                     tamanio, opcionC));
                 }
             }
-        } while (!(opcion == 4));
+            do {
+                opcionRepetir = JOptionPane.showInputDialog(null,
+                        "¿Quieres repetir el programa? (Si o No)");
+            } while (!(opcionRepetir.equalsIgnoreCase("si")
+                    || opcionRepetir.equalsIgnoreCase("no")));
+        } while (!opcionRepetir.equalsIgnoreCase("no"));
     }
 }
